@@ -52,3 +52,35 @@ class Solution:
         
         backtrack(0, "")
         return result
+
+
+#https://leetcode.cn/problems/combination-sum/?envType=study-plan-v2&envId=top-100-liked
+#输入
+#candidates =[2,3,6,7]
+#target =7
+#输出
+#[[2,2,3],[7]]
+
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        result = []
+        check = []
+        #backtrack recursive function
+        def dfs(path):
+            if sum(path) == target:
+                ccopy = sorted(path)
+                if ccopy not in check:
+                    check.append(ccopy.copy())
+                    result.append(path.copy())
+                    return 
+            
+            for c in candidates:
+                if sum(path) + c > target:
+                    continue 
+                
+                path.append(c)
+                dfs(path)
+                path.pop()
+        dfs([])
+        return result
+
