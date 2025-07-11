@@ -129,3 +129,29 @@ class Solution:
             for n in range(len(board[0])):
                 if dfs(m, n, 0): return True
         return False 
+
+
+
+#https://leetcode.cn/problems/palindrome-partitioning/?envType=study-plan-v2&envId=top-100-liked
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        n = len(s)
+        ans = []
+        path = []
+
+        # 考虑 s[i:] 怎么分割
+        def dfs(i: int) -> None:
+            if i == n:  # s 分割完毕
+                ans.append(path.copy())  # 复制 path
+                return
+            for j in range(i, n):  # 枚举子串的结束位置
+                t = s[i: j + 1]  # 分割出子串 t
+                if t == t[::-1]:  # 判断 t 是不是回文串
+                    path.append(t)
+                    # 考虑剩余的 s[j+1:] 怎么分割
+                    dfs(j + 1)
+                    path.pop()  # 恢复现场
+
+        dfs(0)
+        return ans
+
