@@ -7,6 +7,7 @@ A Python Algorithm and Data Structure Toolkit for practicing classic algorithms.
 - Sorting: Bubble, Insertion, Selection, Merge, Quick
 - Graph Traversals: BFS, DFS, Topological Sort
 - Graph Algorithms: Dijkstra, Prim, Kruskal, Bellman-Ford, Ford-Fulkerson
+- Backtrack Algorithms
 - Dynamic Programming: Fibonacci, Knapsack, Subset Sum
 - Matching: Gale-Shapley
 - Data Structures: Heap, Union-Find
