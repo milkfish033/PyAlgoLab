@@ -109,3 +109,23 @@ class Solution:
                 
         backtrack("",l, r)
         return result
+
+#https://leetcode.cn/problems/word-search/submissions/643044860/?envType=study-plan-v2&envId=top-100-liked
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        def dfs(x, y, i):
+            if i == len(word): return True
+            if x >= len(board) or y >= len(board[0]) or x < 0 or y < 0 or board[x][y] != word[i]:
+                return False 
+
+            else:
+                temp = board[x][y]
+                board[x][y] = '#'
+                found = dfs(x+1, y, i+1) or dfs(x-1, y, i+1) or dfs(x, y+1, i+1) or dfs(x, y-1, i+1)                 
+                board[x][y] = temp
+                return found 
+            
+        for m in range(len(board)):
+            for n in range(len(board[0])):
+                if dfs(m, n, 0): return True
+        return False 
