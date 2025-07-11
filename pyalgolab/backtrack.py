@@ -84,3 +84,28 @@ class Solution:
         dfs([])
         return result
 
+
+#https://leetcode.cn/problems/generate-parentheses/solutions/?envType=study-plan-v2&envId=top-100-liked
+#backtrack & dynamic programming
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        l, r = n , n
+        result = []
+        def backtrack(path, i, j):
+            if len(path) == 2*n:
+                result.append(path)
+                return
+
+            if i == 0:
+                backtrack(path + ")", i, j-1)
+
+            elif j == i:
+                backtrack(path + "(", i-1, j)
+            
+            else:
+                backtrack(path + "(", i-1, j)
+                backtrack(path + ")", i, j-1)
+
+                
+        backtrack("",l, r)
+        return result
