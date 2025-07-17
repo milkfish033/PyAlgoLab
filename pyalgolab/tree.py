@@ -15,3 +15,24 @@ class Solution:
 
         dfs(root)
         return ans 
+
+    
+#https://leetcode.cn/problems/binary-tree-level-order-traversal/?envType=study-plan-v2&envId=top-100-liked
+from collections import deque
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        res = []
+        q = deque()
+        if  root is None:
+            return []
+        q.append(root)
+        while q:
+            tmp = []
+            for _ in range(len(q)):
+                n = q.popleft()
+                tmp.append(n.val)
+                if n.left: q.append(n.left)
+                if n.right: q.append(n.right)
+            res.append(tmp)
+        return res 
+        
