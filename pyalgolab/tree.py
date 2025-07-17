@@ -36,3 +36,13 @@ class Solution:
             res.append(tmp)
         return res 
         
+#https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/submissions/644649788/?envType=study-plan-v2&envId=top-100-liked
+class Solution:
+    def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
+        if not nums:
+            return None
+        else:
+            m = len(nums)//2
+            l = self.sortedArrayToBST(nums[:m])
+            r = self.sortedArrayToBST(nums[m+1:])
+            return TreeNode(nums[m], l, r)
