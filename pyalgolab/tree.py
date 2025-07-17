@@ -46,3 +46,17 @@ class Solution:
             l = self.sortedArrayToBST(nums[:m])
             r = self.sortedArrayToBST(nums[m+1:])
             return TreeNode(nums[m], l, r)
+        
+
+#https://leetcode.cn/problems/validate-binary-search-tree/submissions/644721375/?envType=study-plan-v2&envId=top-100-liked
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        def helper(node, lower=float('-inf'), upper=float('inf')):
+            if not node:
+                return True
+            val = node.val
+            if val <= lower or val >= upper:
+                return False
+            return helper(node.left, lower, val) and helper(node.right, val, upper)
+        
+        return helper(root)
