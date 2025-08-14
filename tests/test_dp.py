@@ -1,12 +1,12 @@
 # tests/test_dp.py
 
-from pyalgolab import dp
+from pyalgolab import dp_basic
 
 def test_fib():
-    assert dp.fib(10) == 55
+    assert dp_basic.fib(10) == 55
 
 def test_knapsack():
     values = [60, 100, 120]
     weights = [10, 20, 30]
     capacity = 50
-    assert dp.knapsack(values, weights, capacity) == 220
+    assert dp_basic.knapsack(values, weights, capacity) == 220
