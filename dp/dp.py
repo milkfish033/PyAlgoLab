@@ -82,4 +82,24 @@ def dfs(i, j):
 class Solution:
     def numSquares(self, n: int) -> int:
         return dfs(isqrt(n),n)
-    
+
+##类似的-->下一题
+#https://leetcode.cn/problems/coin-change/submissions/654325063/?envType=study-plan-v2&envId=top-100-liked
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        n = len(coins)
+        @cache
+        def dfs(i, j):
+            #i --> index, j--> rest
+            if i < 0:
+                return 0 if j == 0 else inf 
+            
+            if coins[i] > j:
+                return dfs(i-1, j)
+            
+            else:
+                return min(dfs(i-1, j), 1 + dfs(i, j - coins[i]))
+        
+        ans = dfs(n-1, amount) 
+        
+        return ans if ans < inf else -1
