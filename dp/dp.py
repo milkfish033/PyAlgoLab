@@ -40,3 +40,24 @@ class Solution:
             for j in range(1, i):
                 c[i][j] = c[i-1][j] + c[i-1][j-1] #understand this as how many ways can we pick j items from i items
         return c
+
+
+#https://leetcode.cn/problems/longest-increasing-subsequence/?envType=study-plan-v2&envId=top-100-liked
+
+#bisect 用于快速进行二分查找的一个包
+import bisect
+from typing import List
+
+#这里的核心思想是贪心+二分查找
+#proof of greedy algorithm: 同等长度下，将原先的数字替换为一个更小的数字可以增加后续延长序列的可能性
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        sub = []
+        for x in nums:
+            #bisect_left >= ; bisect_right >
+            i = bisect.bisect_left(sub, x) 
+            if i == len(sub):
+                sub.append(x)
+            else:
+                sub[i] = x
+        return len(sub)
