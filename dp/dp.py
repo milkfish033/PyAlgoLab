@@ -61,3 +61,25 @@ class Solution:
             else:
                 sub[i] = x
         return len(sub)
+
+#https://leetcode.cn/problems/perfect-squares/?envType=study-plan-v2&envId=top-100-liked
+
+#isqrt(10) --> 3
+#1: 对于这种多次调用的情况，把dfs定义在顶层可以节省内存
+#2: 对于求最小值问题，需要考虑是否需要定义一个最大值inf来表示不可能完成的情况，避免无限循环
+from math import isqrt
+@cache 
+def dfs(i, j):
+    if j == 0:
+        return 0
+    #如果i=0，会一直循环，所以定义一个最大值用来规避这条路径
+    elif i == 0:
+        return float("inf")
+    elif j >= i**2: 
+        return min(dfs(i-1, j), 1+ dfs(i, j-i**2))
+    else:
+        return dfs(i-1, j)
+class Solution:
+    def numSquares(self, n: int) -> int:
+        return dfs(isqrt(n),n)
+    
