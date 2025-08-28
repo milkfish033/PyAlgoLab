@@ -67,7 +67,7 @@ class Solution:
 #isqrt(10) --> 3
 #1: 对于这种多次调用的情况，把dfs定义在顶层可以节省内存
 #2: 对于求最小值问题，需要考虑是否需要定义一个最大值inf来表示不可能完成的情况，避免无限循环
-from math import isqrt
+from math import inf, isqrt
 @cache 
 def dfs(i, j):
     if j == 0:
