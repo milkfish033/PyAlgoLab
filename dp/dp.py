@@ -103,3 +103,32 @@ class Solution:
         ans = dfs(n-1, amount) 
         
         return ans if ans < inf else -1
+    
+
+#https://leetcode.cn/problems/partition-equal-subset-sum/?envType=study-plan-v2&envId=top-100-liked
+from typing import List
+
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        total = sum(nums)
+        n = len(nums)
+
+        # 如果总和为奇数，不可能分成两个相等的子集
+        if total % 2 != 0:
+            return False
+        
+        target = total // 2  # 目标是找到一个子集和为 total//2
+
+        @cache
+        def dfs(i, curr):
+            # 如果找到目标子集和，返回 True
+            if curr == target:
+                return True
+            # 如果超出范围或当前和超过 target，就不行
+            if i >= n or curr > target:
+                return False
+            
+            # 两个选择：选当前元素 或 不选
+            return dfs(i+1, curr + nums[i]) or dfs(i+1, curr)
+
+        return dfs(0, 0)
