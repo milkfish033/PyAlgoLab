@@ -132,3 +132,25 @@ class Solution:
             return dfs(i+1, curr + nums[i]) or dfs(i+1, curr)
 
         return dfs(0, 0)
+
+#https://leetcode.cn/problems/word-break/submissions/659300156/?envType=study-plan-v2&envId=top-100-liked
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        wordSet = set(wordDict)  # 提高查询效率
+        n = len(s)
+
+        @cache
+        def dfs(i: int) -> bool:
+            # 如果走到结尾，说明可以拼出来
+            if i == n:
+                return True
+            # 尝试 s[i:j] 是否在字典中
+            for j in range(i + 1, n + 1):
+                if s[i:j] in wordSet and dfs(j):
+                    return True
+            return False
+
+        return dfs(0)
+
+
+        
