@@ -42,5 +42,24 @@ class Solution:
             
         return ans 
 
+#https://leetcode.cn/problems/find-all-anagrams-in-a-string/?envType=study-plan-v2&envId=top-100-liked
+class Solution:
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        temp = sorted(p)
+        n = len(p)
+        res = []
+        i = 0
+        while i < len(s)-n+1:
+            #i左标， i+n-1为右标
+            cur = s[i:i+n]
+            if sorted(cur) == temp:
+                res.append(i)
+                i += 1
+            else:
+                i += 1
+        return res 
+        
+
+
 
         
