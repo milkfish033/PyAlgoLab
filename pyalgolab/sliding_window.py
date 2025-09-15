@@ -97,6 +97,51 @@ class Solution:
                 i += 1
         return res 
         
+#https://leetcode.cn/problems/number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold/submissions/663075119/
+class Solution:
+    def numOfSubarrays(self, arr: List[int], k: int, threshold: int) -> int:
+        tar = k*threshold
+        ans = 0
+        cur = 0
+        for right, x in enumerate(arr):
+            cur += x
+            if cur >= tar and right >= k-1:
+                print(right, cur )
+                ans += 1
+            
+            left = right -k + 1
+            if left >=0:
+                cur -= arr[left]
+
+        return ans 
+                
+#https://leetcode.cn/problems/k-radius-subarray-averages/
+#时间 O(n)
+#空间 O(n)
+class Solution:
+    def getAverages(self, nums: List[int], k: int) -> List[int]:
+        n = len(nums)
+        ans  = []
+        if n - 1>= 2*k:
+            cur = sum(nums[0: 2*k])
+        if n - 1 < 2*k:
+            return [-1] * n
+        if k == 0:
+            return nums
+
+        for mid, x in enumerate(nums):
+            if mid < k or mid >= n - k:
+                ans.append(-1)
+            else:
+                left, right = mid - k, mid + k
+                cur += nums[right]
+                print(left, right, cur )
+                
+                ans.append(cur // (2*k+1))
+                cur -= nums[left]
+
+        return ans 
+            
 
 
 
