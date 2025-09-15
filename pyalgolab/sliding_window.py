@@ -143,6 +143,27 @@ class Solution:
         return ans 
             
 
+#https://leetcode.cn/problems/minimum-recolors-to-get-k-consecutive-black-blocks/submissions/663099637/
+class Solution:
+    def minimumRecolors(self, blocks: str, k: int) -> int:
+        # == 给定一个长度为k的字串，求W的最小数值
+        ans, cur = inf, 0
 
+        for right, x in enumerate(blocks):
+            if x == 'W':
+                cur += 1
+            
+            left = right - k + 1
+            if left < 0:
+                continue 
+            
+            ans = min(ans, cur)
+            if ans == 0:
+                break 
+            if blocks[left] == 'W':
+                cur -= 1
+        
+        return ans 
+            
 
         
