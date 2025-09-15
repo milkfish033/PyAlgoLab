@@ -19,9 +19,22 @@ class Solution:
                 
             if s[left] in 'aeiou':
                 cur -= 1
-                
+
         return ans
 
+#https://leetcode.cn/problems/maximum-average-subarray-i/
+class Solution:
+    def findMaxAverage(self, nums: List[int], k: int) -> float:
+        ans, cur = float('-inf'), 0
+        for right, x in enumerate(nums):
+            cur += x 
+            left = right - k + 1
+
+            if left >= 0: #注意题目要求，在窗口没有形成之前，不用计算平均值，否则会用错误的均值进行比较
+                avg = cur / k
+                ans = max(avg, ans)
+                cur -= nums[left]
+        return ans
 
 #https://leetcode.cn/problems/longest-substring-without-repeating-characters/description/?envType=study-plan-v2&envId=top-100-liked
 
