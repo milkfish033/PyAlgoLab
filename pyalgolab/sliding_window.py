@@ -1,6 +1,7 @@
 #----------------------------------------------------------------------------------#
 #困难题#
 #https://leetcode.cn/problems/maximum-sum-of-almost-unique-subarray/
+from collections import defaultdict
 class Solution:
     def maxSum(self, nums: List[int], m: int, k: int) -> int:
         ans = s = 0
@@ -198,4 +199,24 @@ class Solution:
                 cur -= 1
         return ans 
     
+#https://leetcode.cn/problems/maximum-sum-of-distinct-subarrays-with-length-k/submissions/663453844/
+from collections import defaultdict
+class Solution:
+    def maximumSubarraySum(self, nums: List[int], k: int) -> int:
+        cur = ans = 0
+        cnt = defaultdict(int)
+        for right, x in enumerate(nums):
+            cur += x
+            cnt[x] += 1
+            left = right - k + 1
+            if left < 0:
+                continue
+            if len(cnt) == k:
+                ans = max( cur, ans)
+            past = nums[left]
+            cur -= past
+            cnt[past] -= 1
+            if cnt[past] == 0:
+                del cnt[past]
+        return ans 
 
