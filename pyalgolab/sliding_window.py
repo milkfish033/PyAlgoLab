@@ -1,3 +1,38 @@
+#----------------------------------------------------------------------------------#
+#困难题#
+#https://leetcode.cn/problems/maximum-sum-of-almost-unique-subarray/
+class Solution:
+    def maxSum(self, nums: List[int], m: int, k: int) -> int:
+        ans = s = 0
+        cnt = defaultdict(int)
+        for i, x in enumerate(nums):
+            # 1. 进入窗口
+            s += x
+            cnt[x] += 1
+            left = i - k + 1
+            if left < 0:  # 窗口大小不足 k
+                continue
+            # 2. 更新答案
+            if len(cnt) >= m:
+                ans = max(ans, s)
+            # 3. 离开窗口
+            out = nums[left]
+            s -= out
+            cnt[out] -= 1
+            if cnt[out] == 0: #注意这里需要去掉出现次数为0的数
+                del cnt[out]
+        return ans
+
+
+
+
+
+
+
+
+
+
+
 #https://leetcode.cn/problems/maximum-number-of-vowels-in-a-substring-of-given-length/
 #时间复杂度：O(n)
 #空间复杂度 O(1)
@@ -148,7 +183,6 @@ class Solution:
     def minimumRecolors(self, blocks: str, k: int) -> int:
         # == 给定一个长度为k的字串，求W的最小数值
         ans, cur = inf, 0
-
         for right, x in enumerate(blocks):
             if x == 'W':
                 cur += 1
@@ -162,8 +196,6 @@ class Solution:
                 break 
             if blocks[left] == 'W':
                 cur -= 1
-        
         return ans 
-            
+    
 
-        
