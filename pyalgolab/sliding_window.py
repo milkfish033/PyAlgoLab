@@ -26,11 +26,27 @@ class Solution:
 
 
 
+#https://leetcode.cn/problems/maximum-points-you-can-obtain-from-cards/description/
+#运用转换的思想，找到题目中的滑动窗口，和求出的值
+class Solution:
+    def maxScore(self, cardPoints: List[int], k: int) -> int:
+        ans = 0 
+        first_sum = 0
+        total = sum(cardPoints)
+        n = len(cardPoints)
+        if k == n:
+            return total
+        for right, x in enumerate(cardPoints):
+            first_sum += x
+            left = right + 1 - n + k 
+            if left >= 0:
+                ans = max(ans, total- first_sum)
+                print(left)
+                first_sum -= cardPoints[left]
+        return ans
 
 
-
-
-
+#---------------------------------------------------------------------------------------------#
 
 
 
