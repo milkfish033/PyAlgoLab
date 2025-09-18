@@ -45,6 +45,37 @@ class Solution:
                 first_sum -= cardPoints[left]
         return ans
 
+#https://leetcode.cn/problems/grumpy-bookstore-owner/description/
+#T: O(n)
+#S: O(1)
+class Solution:
+    def maxSatisfied(self, customers: List[int], grumpy: List[int], minutes: int) -> int:
+        #实用技巧能挽留的最大值： 不满意--》满意
+        cur = ans = 0 
+        res = 0
+        for right, x in enumerate (customers):
+            if grumpy[right] == 1:
+                cur += x
+            left = right - minutes + 1
+            if left >= 0:
+                ans = max(cur, ans)
+                if grumpy[left] == 1:
+                    cur -= customers[left]
+                    
+        #不使用技巧的满意值
+        for j, k in enumerate (customers):
+            if grumpy[j] == 0:
+                res += k
+        return ans + res
+
+
+
+
+
+
+
+
+
 
 #---------------------------------------------------------------------------------------------#
 
