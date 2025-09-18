@@ -267,3 +267,20 @@ class Solution:
                 del cnt[past]
         return ans 
 
+#https://leetcode.cn/problems/maximum-length-substring-with-two-occurrences/submissions/664090547/
+#T:O(n) 注意这里的时间复杂度是O（n）因为：left从左往右增加，最多移动len（s）次，不会每次循环都从头开始
+#S:O(1) 
+class Solution:
+    from collections import Counter
+    def maximumLengthSubstring(self, s: str) -> int:
+        cnt = Counter()
+        left = ans = 0
+        for right, x in enumerate(s):
+            cnt[x] += 1
+            while cnt[x] > 2:
+                cnt[s[left]] -= 1
+                left += 1
+            
+            ans = max(ans, right - left + 1)
+        return ans 
+        
