@@ -283,4 +283,21 @@ class Solution:
             
             ans = max(ans, right - left + 1)
         return ans 
+
+#https://leetcode.cn/problems/longest-subarray-of-1s-after-deleting-one-element/submissions/664146122/
+#T: O(n)
+#S : O(1)
+class Solution:
+    def longestSubarray(self, nums: List[int]) -> int:
+        ans = cnt0 = left = 0
+        for right, x in enumerate(nums):
+            cnt0 += 1 - x  # 维护窗口中的 0 的个数
+            while cnt0 > 1: 
+                cnt0 -= 1 - nums[left]  
+                left += 1
+            #注意这里每次更新答案都是窗口内只有1个0的情况
+            ans = max(ans, right - left)
+        return ans
+
+
         
