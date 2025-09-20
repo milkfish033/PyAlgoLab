@@ -74,6 +74,7 @@ class Solution:
 
 
 
+#https://leetcode.cn/problems/minimum-removals-to-balance-array/submissions/664382099/
 
 
 
@@ -120,6 +121,16 @@ class Solution:
         return ans
 
 #https://leetcode.cn/problems/longest-substring-without-repeating-characters/description/?envType=study-plan-v2&envId=top-100-liked
+class Solution:
+    def minRemoval(self, nums: List[int], k: int) -> int:
+        nums.sort()
+        n = len(nums)
+        left, ans = 0, n
+        for right, x in enumerate(nums):
+            while x > k*nums[left]:
+                left += 1
+            ans = min(ans, n- (right - left + 1))
+        return ans 
 
 #prompt1: 
 class Solution:
