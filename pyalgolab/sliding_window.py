@@ -311,4 +311,22 @@ class Solution:
         return ans
 
 
+#https://leetcode.cn/problems/get-equal-substrings-within-budget/
+#T: O(n)
+#S: O(k) or O(1)
+class Solution:
+    from collections import defaultdict
+    def equalSubstring(self, s: str, t: str, maxCost: int) -> int:
+        diff = defaultdict(int)
+        for i in range(len(s)):
+            diff[i] = abs(ord(s[i]) - ord(t[i]))
+        ans = cur = 0 
+        left = 0 
+        for right, x in enumerate(s):
+            cur += diff[right]
+            while cur > maxCost:
+                cur -= diff[left]
+                left += 1
+            ans = max(ans, right - left + 1) 
+        return ans 
         
