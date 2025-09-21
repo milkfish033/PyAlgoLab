@@ -330,3 +330,19 @@ class Solution:
             ans = max(ans, right - left + 1) 
         return ans 
         
+#https://leetcode.cn/problems/fruit-into-baskets/submissions/664819863/
+class Solution:
+    from collections import Counter
+    def totalFruit(self, fruits: List[int]) -> int:
+        #==求最多含有两种不同元素的字串的最大长度
+        cnt = Counter()
+        ans = left = 0
+        for right, x in enumerate(fruits):
+            cnt[x] += 1
+            while len(cnt) > 2:
+                cnt[fruits[left]] -= 1
+                if cnt[fruits[left]] == 0:
+                    del cnt[fruits[left]]
+                left += 1
+            ans = max(right - left + 1, ans)
+        return ans 
