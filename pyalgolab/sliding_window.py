@@ -346,3 +346,20 @@ class Solution:
                 left += 1
             ans = max(right - left + 1, ans)
         return ans 
+
+#https://leetcode.cn/problems/minimum-size-subarray-sum/
+#O(n)
+#O(1)
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        cur = left = 0
+        ans = inf
+        for right, x in enumerate(nums):
+            cur += x
+            while cur >= target:
+                ans = min(right - left + 1, ans)
+                cur -= nums[left]
+                left += 1
+        return ans if ans != inf else 0 
+
+        
