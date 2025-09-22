@@ -4,8 +4,5 @@ a = "www"
 
 
 s = s + "s"
-print(s)
-
-print(a[:2])
-
-print(4//3)
+print(len('100101011001001'))
+print(len('1100100101011'))

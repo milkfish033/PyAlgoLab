@@ -69,7 +69,32 @@ class Solution:
         return ans + res
 
 
+#https://leetcode.cn/problems/shortest-and-lexicographically-smallest-beautiful-string/description/
+#O(n^2)
+#O(n)
+class Solution:
+    from collections import Counter
+    def shortestBeautifulSubstring(self, s: str, k: int) -> str:
+        cnt = Counter()
+        n = len(s)
+        ans = n + 1   # 最短长度
+        res = ""      # 记录答案
+        left = 0 
+        for right, x in enumerate(s):
+            cnt[x] += 1
+            while cnt['1'] >= k:     
+                # 如果是合法的美丽子字符串
+                if cnt['1'] == k:
+                    length = right - left + 1
+                    sub = s[left:right+1]
+                    # 更新最短，或在同样长度下比较字典序
+                    if length < ans or (length == ans and sub < res):
+                        ans = length
+                        res = sub
+                cnt[s[left]] -= 1
+                left += 1 
 
+        return res
 
 
 
