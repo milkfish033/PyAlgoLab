@@ -441,3 +441,22 @@ class Solution:
                 left += 1
             ans += right - left + 1
         return ans 
+
+#https://leetcode.cn/problems/count-subarrays-where-max-element-appears-at-least-k-times/description/s
+class Solution:
+    from collections import Counter
+    def countSubarrays(self, nums: List[int], k: int) -> int:
+        cnt_t = 0 #注意当题目只关注单一元素时，可以用一个计数器来代替哈希表
+        target = max(nums)
+        ans = left = 0 
+        for right, x in enumerate(nums):
+            if x == target:
+                cnt_t += 1
+            while cnt_t == k: #只关注单一元素的出现次数
+                if nums[left] == target:
+                    cnt_t -= 1
+                left += 1
+            ans += left 
+        return ans
+
+
