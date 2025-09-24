@@ -460,3 +460,16 @@ class Solution:
         return ans
 
 
+#https://leetcode.cn/problems/count-substrings-with-k-frequency-characters-i/description/
+class Solution:
+    from collections import Counter
+    def numberOfSubstrings(self, s: str, k: int) -> int:
+        cnt = Counter()
+        ans = left = 0 
+        for _, x in enumerate(s):
+            cnt[x] += 1
+            while cnt[x] == k:
+                cnt[s[left]]-= 1
+                left += 1
+            ans += left
+        return ans 
