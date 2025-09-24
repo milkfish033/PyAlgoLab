@@ -473,3 +473,21 @@ class Solution:
                 left += 1
             ans += left
         return ans 
+
+#https://leetcode.cn/problems/count-complete-subarrays-in-an-array/description/
+class Solution:
+    from collections import Counter
+    def countCompleteSubarrays(self, nums: List[int]) -> int:
+        uq = len(set(nums)) 
+        left = ans = 0 
+        cnt = Counter()
+        for x in nums:
+            cnt[x] += 1
+            while len(cnt) >= uq:
+                cur = nums[left]
+                cnt[cur] -= 1
+                if cnt[cur] == 0:
+                    del cnt[cur]
+                left += 1
+            ans += left
+        return ans
