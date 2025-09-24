@@ -406,3 +406,16 @@ class Solution:
         return ans if ans != inf else 0 
 
         
+#https://leetcode.cn/problems/count-substrings-that-satisfy-k-constraint-i/description/
+class Solution:
+    from collections import Counter
+    def countKConstraintSubstrings(self, s: str, k: int) -> int:
+        cnt = Counter()
+        ans = left = 0 
+        for right, x in enumerate(s):
+            cnt[x] += 1
+            while cnt['0'] > k and cnt['1'] > k:
+                cnt[s[left]] -= 1
+                left += 1
+            ans += right - left + 1
+        return ans 
