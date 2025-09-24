@@ -102,6 +102,7 @@ class Solution:
 #https://leetcode.cn/problems/subarray-product-less-than-k/
 #对于这种求子数组个数的题目，当内层循环[left, right]是合法的，[left+1, right], [left+2, right]....都合法
 #所以往往最后修改为 ans+= right - left + 1
+#越短越合法
 #O(n)
 #O(n)
 class Solution:
@@ -119,7 +120,28 @@ class Solution:
         return ans
         
 
-
+#越长越合法
+#对于这类题型， 首先找到刚好满足临界值的left，right， 即【left，right】不合法
+#对于[left-1, right], [left-2, right]...都是合法的
+#ans += left
+#https://leetcode.cn/problems/number-of-substrings-containing-all-three-characters/submissions/665537461/
+#O(n)
+#O(1)
+class Solution:
+    from collections import Counter
+    def numberOfSubstrings(self, s: str) -> int:
+        cnt = Counter()
+        left = ans = 0 
+        for right, x in enumerate(s):
+            cnt[x] += 1
+            while len(cnt) == 3:
+                cnt[s[left]] -= 1
+                if cnt[s[left]] == 0:
+                    del cnt[s[left]]
+                left += 1
+            ans += left 
+        return ans 
+                
 
 #---------------------------------------------------------------------------------------------#
 
