@@ -102,8 +102,9 @@ class Solution:
 #https://leetcode.cn/problems/subarray-product-less-than-k/
 #对于这种求子数组个数的题目，当内层循环[left, right]是合法的，[left+1, right], [left+2, right]....都合法
 #所以往往最后修改为 ans+= right - left + 1
+#O(n)
+#O(n)
 class Solution:
-    
     def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:
         ans = left = 0 
         cur = 1 #因为是乘法，初始值为1 
