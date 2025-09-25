@@ -143,6 +143,30 @@ class Solution:
         return ans 
                 
 
+#https://leetcode.cn/problems/binary-subarrays-with-sum/description/
+#对于这种恰好个数为k的子数组个数，可以转化为求和大于等于k的子数组个数 - 求和大于等于k+1的子数组个数
+#注意对于特殊情况的处理（即左指针left会一直增加直到越界），需要加上一个判断：left <= right
+#O(n)
+#O(1)
+class Solution:
+    def numSubarraysWithSum(self, nums: List[int], goal: int) -> int:
+        #对于一个list，返还和大于等于k的子数组个数
+        def s(k):
+            
+            ans = left = 0
+            cur = 0
+            for right, x in enumerate(nums):
+                cur += x 
+                while cur >= k and left <= right:
+                    cur -= nums[left]
+                    left += 1
+                ans += left
+            return ans 
+        return s(goal) - s(goal+1)
+        
+                
+
+
 #---------------------------------------------------------------------------------------------#
 
 
