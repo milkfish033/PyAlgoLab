@@ -70,3 +70,18 @@ class Solution:
             return -1
         else:
             return right 
+        
+#https://leetcode.cn/problems/find-smallest-letter-greater-than-target/description/
+class Solution:
+    def nextGreatestLetter(self, letters: List[str], target: str) -> str:
+        def b(t):
+            left, right = -1, len(letters)
+            while left + 1 < right:
+                mid = (right + left) // 2
+                if letters[mid] < t:
+                    left = mid
+                else:
+                    right = mid
+            return right 
+        ans = b( chr(ord(target)+1) )
+        return letters[ans] if ans < len(letters) else letters[0]
