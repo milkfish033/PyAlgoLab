@@ -3,9 +3,9 @@
 def binary_search(arr, target): #return the ***first*** position of first number which is bigger or equal to target
     #开区间写法 （）
     left, right = -1, len(arr)
-    while left + 1 < right: 
+    while left + 1 < right:  
         mid = (left + right) // 2
-        if arr[mid] < target:
+        if arr[mid] < target: #the order here matters !!!
             left = mid 
         else:
             right = mid 
