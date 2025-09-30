@@ -85,3 +85,22 @@ class Solution:
             return right 
         ans = b( chr(ord(target)+1) )
         return letters[ans] if ans < len(letters) else letters[0]
+
+#https://leetcode.cn/problems/maximum-count-of-positive-integer-and-negative-integer/description/
+#O(logn)
+#O(1)
+class Solution:
+    def lowerbound(self, target, arr):
+        left, right = -1, len(arr)
+        while left + 1 < right:
+            mid = (left + right) // 2
+            if arr[mid] < target:
+                left = mid 
+            else:
+                right = mid
+        return right 
+    def maximumCount(self, nums: List[int]) -> int:
+        pos = self.lowerbound(1, nums)
+        neg = self.lowerbound(0, nums) - 1 
+        return max(neg+1, len(nums)-pos)
+
