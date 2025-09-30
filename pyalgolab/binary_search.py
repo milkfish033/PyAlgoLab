@@ -112,5 +112,15 @@ class Solution:
         m = len(potions)
         return [m - bisect_left(potions, success / x) for x in spells]
 
+#https://leetcode.cn/problems/find-the-distance-value-between-two-arrays/solutions/3010185/liang-chong-fang-fa-er-fen-cha-zhao-san-15u9b/
+class Solution:
+    def findTheDistanceValue(self, arr1: List[int], arr2: List[int], d: int) -> int:
+        arr2.sort()
+        ans = 0
+        for x in arr1:
+            i = bisect_left(arr2, x - d)
+            if i == len(arr2) or arr2[i] > x + d:
+                ans += 1
+        return ans
 
 
