@@ -103,4 +103,14 @@ class Solution:
         pos = self.lowerbound(1, nums)
         neg = self.lowerbound(0, nums) - 1 
         return max(neg+1, len(nums)-pos)
+    
+#https://leetcode.cn/problems/successful-pairs-of-spells-and-potions/submissions/
+from bisect import bisect_left
+class Solution:
+    def successfulPairs(self, spells: List[int], potions: List[int], success: int) -> List[int]:
+        potions.sort()
+        m = len(potions)
+        return [m - bisect_left(potions, success / x) for x in spells]
+
+
 
