@@ -1,3 +1,8 @@
+import bisect
+# bisect_left(arr, x) --> return the first position which is >= x
+# bisect_right(arr, x) --> return the first position which is > x 
+
+
 #template
 # Binary Search
 def binary_search(arr, target): #return the ***first*** position of first number which is bigger or equal to target
@@ -124,3 +129,22 @@ class Solution:
         return ans
 
 
+#https://leetcode.cn/problems/longest-subsequence-with-limited-sum/description/
+#O(logn)
+#O(1)
+#前缀和+二分查找
+from bisect import bisect_right
+class Solution:
+    def answerQueries(self, nums: List[int], queries: List[int]) -> List[int]:
+        list.sort(nums)
+        #构建前缀和for nums 
+        s = 0
+        for m, n in enumerate(nums):
+            s += n
+            nums[m] = s
+        ans = [] 
+        for i in queries:
+            ans.append(bisect_right(nums, i))
+        return ans 
+
+        
