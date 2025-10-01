@@ -147,4 +147,21 @@ class Solution:
             ans.append(bisect_right(nums, i))
         return ans 
 
+#https://leetcode.cn/problems/compare-strings-by-frequency-of-the-smallest-character/
+from typing import List
+from bisect import bisect_right
+
+class Solution:
+    def numSmallerByFrequency(self, queries: List[str], words: List[str]) -> List[int]:
+        def f(s):
+            return s.count(min(s))   # 字典序最小的字符出现频次
+        # 先计算 words 的频次数组并排序
+        words_freq = sorted(f(w) for w in words)
+        ans = []
+        for q in queries:
+            fq = f(q)
+            # 找到大于 f(q) 的数量
+            ans.append(len(words_freq) - bisect_right(words_freq, fq))
+        return ans
+
         
