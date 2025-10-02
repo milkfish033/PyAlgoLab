@@ -19,3 +19,18 @@ class Solution:
             else:
                 left = mid 
         return right 
+
+
+#https://leetcode.cn/problems/minimum-time-to-complete-trips/description/
+class Solution:
+    def minimumTime(self, time: List[int], totalTrips: int) -> int:
+        left = min(time) - 1
+        right = min(time) * totalTrips
+        # left, right = 0, totalTrips*max(time)
+        while left + 1 < right:
+            mid = (left + right) // 2 
+            if sum(mid//x for x in time) >= totalTrips:
+                right = mid 
+            else:
+                left = mid 
+        return right 
