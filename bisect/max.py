@@ -18,5 +18,19 @@ class Solution:
             else:
                 right = mid
         return left
+    
+#https://leetcode.cn/problems/maximum-candies-allocated-to-k-children/description/
+class Solution:
+    def maximumCandies(self, candies: List[int], k: int) -> int:
+        left, right = 0, min(max(candies)+1, sum(candies)//k+1)
+        while left + 1 < right:
+            mid = (left + right)//2
+            if sum(x//mid for x in candies) >= k:
+                left = mid 
+            else:
+                right = mid
+        return left 
+            
+    
 
 
