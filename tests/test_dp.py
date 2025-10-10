@@ -1,6 +1,6 @@
 # tests/test_dp.py
 
-from pyalgolab import dp_basic
+from dp import dp_basic
 
 def test_fib():
     assert dp_basic.fib(10) == 55
