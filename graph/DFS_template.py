@@ -22,3 +22,25 @@ def solve(n: int, edges: List[List[int]]) -> List[int]:
             size = dfs(i)
             ans.append(size)
     return ans
+
+
+#https://leetcode.cn/problems/max-area-of-island/description/
+class Solution:
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        ans = 0 
+        def dfs(i, j):
+            if i >= len(grid) or i < 0 or j >= len(grid[0]) or j < 0 or grid[i][j] != 1:
+                return 0
+            size = 1
+            grid[i][j] = 2
+            size += dfs(i+1, j)
+            size += dfs(i-1, j)
+            size += dfs(i, j+1)
+            size += dfs(i, j-1)
+            return size 
+        
+        for x in range(len(grid)):
+            for y in range(len(grid[0])):
+                if grid[x][y] == 1:
+                    ans = max(ans, dfs(x, y))
+        return ans
