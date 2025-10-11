@@ -44,3 +44,26 @@ class Solution:
                 if grid[x][y] == 1:
                     ans = max(ans, dfs(x, y))
         return ans
+
+#https://leetcode.cn/problems/count-islands-with-total-value-divisible-by-k/
+class Solution:
+    def countIslands(self, grid: List[List[int]], k: int) -> int:
+        def dfs(i, j):
+            if i >= len(grid) or i < 0 or j >= len(grid[0]) or j < 0 or grid[i][j] == 0:
+                return 0
+            size = grid[i][j]
+            grid[i][j] = 0 #更新遍历过的元素，否则计算重复
+            size += dfs(i+1, j)
+            size += dfs(i-1, j)
+            size += dfs(i, j+1)
+            size += dfs(i, j-1)
+            return size 
+        
+        ans = 0
+        for x in range(len(grid)):
+            for y in range(len(grid[0])):
+                if grid[x][y] != 0:
+                    if dfs(x, y) % k == 0:
+                        ans += 1
+        return ans 
+            
