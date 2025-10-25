@@ -1,3 +1,65 @@
+#hard
+#https://leetcode.cn/problems/YesdPw/description/
+from typing import List
+
+class Solution:
+    def largestArea(self, grid: List[str]) -> int:
+        # run dfs for each inner node 
+        # when reaching the boundary --> fail
+        # rest: +1
+        self.ans = 0
+        visited = set()
+        grid = [list(row) for row in grid]  # make mutable
+        m, n = len(grid), len(grid[0])
+
+        def dfs(i, j, prev):
+            # 越界直接返回，不在这里计为触边；由边界判定负责
+            if i < 0 or j < 0 or i >= m or j >= n:
+                return 0, False
+            # 不是同一连通块或已访问
+            if grid[i][j] != prev or (i, j) in visited:
+                return 0, False
+
+            visited.add((i, j))
+            area = 1
+            # 关键修正：当前格子在边界 => 视为与外侧走廊相邻
+            touches_corridor = (i == 0 or j == 0 or i == m - 1 or j == n - 1)
+
+            # 四个方向探索
+            for dx, dy in [(1,0), (-1,0), (0,1), (0,-1)]:
+                ni, nj = i + dx, j + dy
+                if 0 <= ni < m and 0 <= nj < n:
+                    if grid[ni][nj] == '0':
+                        touches_corridor = True
+                    else:
+                        a, t = dfs(ni, nj, prev)
+                        area += a
+                        touches_corridor = touches_corridor or t
+            return area, touches_corridor
+
+        # 这里仍然只从内圈启动 DFS（保持你的结构不变），
+        # 但 DFS 会跑到边界并正确标记 touches_corridor
+        for x in range(1, m - 1):
+            for y in range(1, n - 1):
+                if grid[x][y] != '0' and (x, y) not in visited:
+                    area, touch = dfs(x, y, grid[x][y])
+                    if not touch:
+                        self.ans = max(self.ans, area)
+
+        return self.ans
+
+
+
+
+
+
+
+
+
+
+
+
+
 #https://leetcode.cn/problems/number-of-islands/description/
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
