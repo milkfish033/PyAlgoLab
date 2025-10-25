@@ -96,6 +96,36 @@ class Solution:
         ans.sort()
         return ans
             
-#more to come
+#https://leetcode.cn/problems/island-perimeter/
+class Solution:
+    # O(mn)
+    # O(mn) note python uses stack for recursion
+    # +1 when:
+    # out of index
+    # move to '0'
 
-        
+    #note here how we define the self.ans
+    def islandPerimeter(self, grid: List[List[int]]) -> int:
+        self.ans = 0
+        def dfs(i, j):
+            global ans
+            if i < 0 or j < 0 or i>= len(grid) or j >= len(grid[0]):
+                self.ans += 1
+                return 
+            if grid[i][j] == 0:
+                self.ans += 1
+                return 
+            if grid[i][j] == 1:
+                grid[i][j] = -1 #mark as visited 
+                dfs(i+1, j)
+                dfs(i-1, j)
+                dfs(i, j+1)
+                dfs(i, j-1)
+
+        for x, row in enumerate(grid):
+            for i, j in enumerate(row):
+                if j == 1:
+                    dfs(x, i)
+    
+        return self.ans 
+                
